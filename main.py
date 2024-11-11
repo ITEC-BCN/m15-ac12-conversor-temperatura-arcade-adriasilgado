@@ -1,17 +1,59 @@
+@namespace
+class SpriteKind:
+    option = SpriteKind.create()
+    user = SpriteKind.create()
 def CtoF():
     global celsius, fahrenheit
     game.splash("Ingrese la temperatura en Celsius:")
     celsius = game.ask_for_number("Celsius:", 4)
     fahrenheit = Math.round(celsius * 9 / 5 + 32)
     game.splash("" + str(celsius) + "°C es igual a " + ("" + str(fahrenheit)) + "°F")
+def menu():
+    global cel, far
+    game.show_long_text("Mou el personatje amb el cursor", DialogLayout.BOTTOM)
+    cel = sprites.create(assets.image("""
+        OptA
+    """), SpriteKind.option)
+    far = sprites.create(assets.image("""
+        OptB
+    """), SpriteKind.option)
+    cel.set_position(30, 70)
+    far.set_position(130, 70)
+    choose.set_position(80, 70)
+    choose.set_bounce_on_wall(True)
+    choose.set_stay_in_screen(True)
+    controller.move_sprite(choose)
+
+def on_on_overlap(sprite, otherSprite):
+    otherSprite.start_effect(effects.halo, 1000)
+    if otherSprite == cel:
+        choose.say_text("Celsius a Farenheit", 100, False)
+        if controller.A.is_pressed():
+            effects.clear_particles(otherSprite)
+            choose.set_position(85, 70)
+            CtoF()
+    elif otherSprite == far:
+        choose.say_text("Farenheit a Celsius", 100, False)
+        if controller.A.is_pressed():
+            effects.clear_particles(otherSprite)
+            choose.set_position(85, 70)
+            FtoC()
+sprites.on_overlap(SpriteKind.user, SpriteKind.option, on_on_overlap)
+
 def FtoC():
     global fahrenheit, celsius
     game.splash("Ingrese la temperatura en Fahrenheit:")
     fahrenheit = game.ask_for_number("Fahrenheit:", 4)
     celsius = Math.round((fahrenheit - 32) * (5 / 9))
     game.splash("" + str(fahrenheit) + "°F es igual a " + ("" + str(celsius)) + "°C")
-celsius = 0
+far: Sprite = None
+cel: Sprite = None
 fahrenheit = 0
+celsius = 0
+choose: Sprite = None
+choose = sprites.create(assets.image("""
+    Cross
+"""), SpriteKind.user)
 scene.set_background_image(img("""
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
@@ -134,10 +176,4 @@ scene.set_background_image(img("""
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
 """))
-while True:
-    CtoF()
-    fahrenheit = 0
-    celsius = 0
-    FtoC()
-    fahrenheit = 0
-    celsius = 0
+menu()
