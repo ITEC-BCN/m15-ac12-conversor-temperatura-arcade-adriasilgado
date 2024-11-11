@@ -33,7 +33,7 @@ sprites.onOverlap(SpriteKind.user, SpriteKind.option, function on_on_overlap(spr
         choose.sayText("Celsius a Farenheit", 100, false)
         if (controller.A.isPressed()) {
             effects.clearParticles(otherSprite)
-            choose.setPosition(85, 70)
+            choose.setPosition(80, 70)
             CtoF()
         }
         
@@ -41,7 +41,7 @@ sprites.onOverlap(SpriteKind.user, SpriteKind.option, function on_on_overlap(spr
         choose.sayText("Farenheit a Celsius", 100, false)
         if (controller.A.isPressed()) {
             effects.clearParticles(otherSprite)
-            choose.setPosition(85, 70)
+            choose.setPosition(80, 70)
             FtoC()
         }
         

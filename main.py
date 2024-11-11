@@ -29,13 +29,13 @@ def on_on_overlap(sprite, otherSprite):
         choose.say_text("Celsius a Farenheit", 100, False)
         if controller.A.is_pressed():
             effects.clear_particles(otherSprite)
-            choose.set_position(85, 70)
+            choose.set_position(80, 70)
             CtoF()
     elif otherSprite == far:
         choose.say_text("Farenheit a Celsius", 100, False)
         if controller.A.is_pressed():
             effects.clear_particles(otherSprite)
-            choose.set_position(85, 70)
+            choose.set_position(80, 70)
             FtoC()
 sprites.on_overlap(SpriteKind.user, SpriteKind.option, on_on_overlap)
 
