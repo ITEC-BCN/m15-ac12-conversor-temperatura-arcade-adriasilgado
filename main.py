@@ -9,8 +9,7 @@ def CtoF():
     fahrenheit = Math.round(celsius * 9 / 5 + 32)
     game.splash("" + str(celsius) + "°C es igual a " + ("" + str(fahrenheit)) + "°F")
 def menu():
-    global cel, far
-    game.show_long_text("Mou el personatje amb el cursor", DialogLayout.BOTTOM)
+    global cel, far   
     cel = sprites.create(assets.image("""
         OptA
     """), SpriteKind.option)
@@ -25,7 +24,7 @@ def menu():
     controller.move_sprite(choose)
 
 def on_on_overlap(sprite, otherSprite):
-    otherSprite.start_effect(effects.halo, 1000)
+    otherSprite.start_effect(effects.bubbles, 21)
     if otherSprite == cel:
         choose.say_text("Celsius a Farenheit", 100, False)
         if controller.A.is_pressed():

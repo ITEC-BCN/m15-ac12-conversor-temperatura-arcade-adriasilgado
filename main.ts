@@ -13,7 +13,6 @@ function CtoF() {
 
 function menu() {
     
-    game.showLongText("Mou el personatje amb el cursor", DialogLayout.Bottom)
     cel = sprites.create(assets.image`
         OptA
     `, SpriteKind.option)
@@ -29,7 +28,7 @@ function menu() {
 }
 
 sprites.onOverlap(SpriteKind.user, SpriteKind.option, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
-    otherSprite.startEffect(effects.halo, 1000)
+    otherSprite.startEffect(effects.bubbles, 21)
     if (otherSprite == cel) {
         choose.sayText("Celsius a Farenheit", 100, false)
         if (controller.A.isPressed()) {
